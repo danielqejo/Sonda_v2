@@ -13,14 +13,29 @@ import org.testcontainers.utility.DockerImageName;
 public abstract class IntegrationTest {
 
     @Container
-    protected static final PostgreSQLContainer POSTGRE_SQL_CONTAINER =
-            new PostgreSQLContainer(DockerImageName.parse("postgres:14.5"));
+    protected static final PostgresContainer POSTGRE_SQL_CONTAINER;
 
+    static {
+        POSTGRE_SQL_CONTAINER = new PostgresContainer();
+        POSTGRE_SQL_CONTAINER.start();
+    }
 
     @DynamicPropertySource
     private static void postgresProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", POSTGRE_SQL_CONTAINER::getJdbcUrl);
         registry.add("spring.flyway.url", POSTGRE_SQL_CONTAINER::getJdbcUrl);
+    }
+
+    static class PostgresContainer extends PostgreSQLContainer<PostgresContainer> {
+
+        public PostgresContainer() {
+            super(DockerImageName.parse("postgres:14.5"));
+        }
+
+        @Override
+        public void stop() {
+            // Do Nothing
+        }
     }
 
 }

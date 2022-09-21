@@ -133,6 +133,12 @@
 				</executions>
 				<configuration>
 					<argLine>--enable-preview</argLine>
+					<classpathDependencyExcludes>
+						<classpathDependencyExcludes>${groupId}:${artifactId}</classpathDependencyExcludes>
+					</classpathDependencyExcludes>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${project.build.outputDirectory}</additionalClasspathElement>
+					</additionalClasspathElements>
 				</configuration>
 			</plugin>
 		</plugins>
