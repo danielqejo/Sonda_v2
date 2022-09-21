@@ -96,6 +96,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<classifier>sb-executable</classifier>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.flywaydb</groupId>
@@ -133,12 +136,6 @@
 				</executions>
 				<configuration>
 					<argLine>--enable-preview</argLine>
-					<classpathDependencyExcludes>
-						<classpathDependencyExcludes>${groupId}:${artifactId}</classpathDependencyExcludes>
-					</classpathDependencyExcludes>
-					<additionalClasspathElements>
-						<additionalClasspathElement>${project.build.outputDirectory}</additionalClasspathElement>
-					</additionalClasspathElements>
 				</configuration>
 			</plugin>
 		</plugins>
